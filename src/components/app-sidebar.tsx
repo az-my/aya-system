@@ -22,6 +22,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
+  SidebarFooter,
 } from "@/components/ui/sidebar"
 
 const navItems = [
@@ -38,21 +39,26 @@ export function AppSidebar(
   const pathname = usePathname()
 
   return (
-    <Sidebar {...props}>
-      <SidebarHeader className="border-b border-sidebar-border">
-        <div className="flex flex-col gap-1 px-2 py-3">
-          <Link
-            href="/"
-            className="flex items-center gap-2 font-semibold text-sidebar-foreground hover:text-primary"
-          >
-            <span className="text-lg font-bold text-primary">AYA</span>
-          </Link>
-          <span className="text-xs text-muted-foreground">Alih Daya</span>
-        </div>
+    <Sidebar collapsible="icon" {...props}>
+      <SidebarHeader className="border-b border-sidebar-border px-3 py-4">
+        <Link
+          href="/"
+          className="flex items-center gap-2 group-data-[collapsible=icon]:justify-center"
+        >
+          <span className="text-xl font-bold tracking-tight">
+            <span className="text-[#FF0033]">A</span>
+            <span className="text-[#0F0F0F]">Y</span>
+            <span className="text-[#FF0033]">A</span>
+          </span>
+          <span className="text-xs text-[#606060] group-data-[collapsible=icon]:hidden">
+            Alih Daya
+          </span>
+        </Link>
       </SidebarHeader>
+
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="text-muted-foreground">
+          <SidebarGroupLabel className="text-[#606060] text-xs uppercase tracking-wider font-medium">
             Menu
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -62,7 +68,16 @@ export function AppSidebar(
                 const Icon = item.icon
                 return (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild isActive={isActive}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={isActive}
+                      tooltip={item.title}
+                      className={
+                        isActive
+                          ? "bg-[#F2F2F2] text-[#0F0F0F] font-medium [&>svg]:text-[#FF0033]"
+                          : "text-[#606060] hover:bg-[#F2F2F2] hover:text-[#0F0F0F]"
+                      }
+                    >
                       <Link href={item.href}>
                         <Icon className="size-4" />
                         <span>{item.title}</span>
@@ -71,22 +86,21 @@ export function AppSidebar(
                   </SidebarMenuItem>
                 )
               })}
+
               <SidebarMenuItem>
                 <SidebarMenuButton
                   asChild
                   disabled
-                  className="cursor-not-allowed opacity-70"
+                  className="cursor-not-allowed opacity-60 text-[#606060]"
+                  tooltip="Lembur"
                 >
                   <span className="flex w-full items-center justify-between">
                     <span className="flex items-center gap-2">
                       <Clock className="size-4" />
                       Lembur
                     </span>
-                    <Badge
-                      variant="secondary"
-                      className="text-[10px] font-normal text-muted-foreground"
-                    >
-                      COMING SOON
+                    <Badge className="text-[10px] font-normal bg-[#FF0033]/10 text-[#CC0026] border-0">
+                      SOON
                     </Badge>
                   </span>
                 </SidebarMenuButton>
@@ -95,6 +109,12 @@ export function AppSidebar(
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+
+      <SidebarFooter className="border-t border-sidebar-border p-3">
+        <div className="text-[10px] text-[#606060] group-data-[collapsible=icon]:hidden">
+          v0.1.0
+        </div>
+      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   )

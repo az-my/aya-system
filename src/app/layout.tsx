@@ -22,7 +22,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "AYA - Sistem Manajemen Alih Daya",
-  description: "Workforce management system for outsourced workers (Tenaga Alih Daya)",
+  description:
+    "Workforce management system for outsourced workers (Tenaga Alih Daya)",
 };
 
 export default function RootLayout({
@@ -31,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" className="dark">
+    <html lang="id">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
@@ -39,14 +40,14 @@ export default function RootLayout({
           <SidebarProvider>
             <AppSidebar />
             <SidebarInset>
-              <header className="flex h-14 shrink-0 items-center gap-2 border-b border-border px-4">
-                <SidebarTrigger className="-ml-1" />
+              <header className="flex h-14 shrink-0 items-center gap-2 border-b border-[#E5E5E5] bg-white px-6">
+                <SidebarTrigger className="-ml-1 text-[#606060] hover:text-[#0F0F0F]" />
                 <Separator
                   orientation="vertical"
                   className="mr-2 h-4 data-[orientation=vertical]:h-4"
                 />
               </header>
-              <main className="flex-1 p-4">{children}</main>
+              <main className="flex-1 px-6 py-6">{children}</main>
             </SidebarInset>
           </SidebarProvider>
         </TooltipProvider>

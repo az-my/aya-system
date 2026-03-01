@@ -18,3 +18,10 @@
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+# test output
+pdf-test-output/
+# local config
+.claude/
+.mcp.json
+# supabase temp
+supabase/.temp/
